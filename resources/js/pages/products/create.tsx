@@ -23,25 +23,22 @@ export default function Create() {
     });
 
     useEffect(() => {
-        if (Object.keys(errors).length > 0 && processing === false)
-            handleError();
+        if (Object.keys(errors).length > 0 && processing === false) {
+            toast.error(ErrorComponent, {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'light',
+            });
+        }
     }, [processing]);
 
     const handleSumbit = (e: React.FormEvent) => {
         e.preventDefault();
         post('/products');
-    };
-
-    const handleError = () => {
-        toast.error(ErrorComponent, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: 'light',
-        });
     };
 
     const ErrorComponent = (
