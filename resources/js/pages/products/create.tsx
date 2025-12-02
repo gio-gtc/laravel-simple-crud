@@ -22,6 +22,17 @@ export default function Create() {
         description: '',
     });
 
+    const ErrorComponent = (
+        <div>
+            <p style={{ fontWeight: 'bold' }}>Error!</p>
+            <ul>
+                {Object.entries(errors).map(([key, message]) => (
+                    <li key={key}>- {message as string}</li>
+                ))}
+            </ul>
+        </div>
+    );
+
     useEffect(() => {
         if (Object.keys(errors).length > 0 && processing === false) {
             toast.error(ErrorComponent, {
@@ -40,17 +51,6 @@ export default function Create() {
         e.preventDefault();
         post('/products');
     };
-
-    const ErrorComponent = (
-        <div>
-            <p style={{ fontWeight: 'bold' }}>Error!</p>
-            <ul>
-                {Object.entries(errors).map(([key, message]) => (
-                    <li key={key}>- {message as string}</li>
-                ))}
-            </ul>
-        </div>
-    );
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

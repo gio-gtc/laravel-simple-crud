@@ -21,28 +21,6 @@ export default function EditProduct({
         description: description,
     });
 
-    useEffect(() => {
-        if (Object.keys(errors).length > 0 && processing === false)
-            handleError();
-    }, [processing]);
-
-    const handleUpdate = (e: React.FormEvent) => {
-        e.preventDefault();
-        put(`/products/${id}/update`);
-    };
-
-    const handleError = () => {
-        toast.error(ErrorComponent, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            theme: 'light',
-        });
-    };
-
     const ErrorComponent = (
         <div>
             <p style={{ fontWeight: 'bold' }}>Error!</p>
@@ -53,6 +31,25 @@ export default function EditProduct({
             </ul>
         </div>
     );
+
+    useEffect(() => {
+        if (Object.keys(errors).length > 0 && processing === false) {
+            toast.error(ErrorComponent, {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'light',
+            });
+        }
+    }, [processing]);
+
+    const handleUpdate = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(`/products/${id}/update`);
+    };
 
     return (
         <AppLayout
