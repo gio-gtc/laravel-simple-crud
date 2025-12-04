@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/table';
 import AppLayout from '@/layouts/app-layout';
 import { Product, type BreadcrumbItem } from '@/types';
+import { PageProps } from '@inertiajs/core';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { SquarePen, Trash2 } from 'lucide-react';
 import { useEffect } from 'react';
@@ -22,8 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export interface pageProps {
-    [key: string]: any;
+interface ProductPageProps extends PageProps {
     flash: {
         message?: string;
     };
@@ -31,7 +31,7 @@ export interface pageProps {
 }
 
 export default function Index() {
-    const { flash, products } = usePage<pageProps>().props;
+    const { flash, products } = usePage<ProductPageProps>().props;
     const { processing, delete: destroy } = useForm();
 
     useEffect(() => {
