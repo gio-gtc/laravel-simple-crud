@@ -23,6 +23,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export interface pageProps {
+    [key: string]: any;
     flash: {
         message?: string;
     };
@@ -30,7 +31,7 @@ export interface pageProps {
 }
 
 export default function Index() {
-    const { flash, products } = usePage().props as pageProps;
+    const { flash, products } = usePage<pageProps>().props;
     const { processing, delete: destroy } = useForm();
 
     useEffect(() => {
